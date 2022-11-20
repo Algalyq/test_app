@@ -4,7 +4,7 @@ from django.core.validators import RegexValidator
 from django.contrib.postgres.fields import ArrayField
 from accounts.models import User
 from .utils import getweather
-
+from datetime import datetime
 import asyncio
 SUBSCRIPTION_DIR = [
     ('Econom','Econom'),
@@ -76,5 +76,4 @@ class WeatherModel(models.Model):
     @classmethod
     def create(cls,resort_address,description,temp):
         weather = cls(resort_address=resort_address,description=description,temp=temp)
-
         return weather

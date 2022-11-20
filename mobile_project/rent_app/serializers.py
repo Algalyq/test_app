@@ -15,7 +15,7 @@ class BootsSerializer(serializers.ModelSerializer):
 
 class WeatherSerializer(serializers.ModelSerializer):
     class Meta:
-        model = WeatherModel
+        model = WeatherModel.objects.latest('resort_address')
         fields = ('description','temp')
 
 class SkiSerializer(serializers.ModelSerializer):
