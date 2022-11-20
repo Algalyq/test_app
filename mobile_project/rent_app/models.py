@@ -3,6 +3,9 @@ from django.contrib.gis.db import models
 from django.core.validators import RegexValidator
 from django.contrib.postgres.fields import ArrayField
 from accounts.models import User
+from .utils import getweather
+
+import asyncio
 SUBSCRIPTION_DIR = [
     ('Econom','Econom'),
     ('Business','Business'),
@@ -63,3 +66,15 @@ class Payment_history(models.Model):
 
     class Meta:
         verbose_name_plural = 'Payment history'
+
+class WeatherModel(models.Model):
+    resort_address = models.ForeignKey(Resort_directory,related_name='weather', on_delete=models.CASCADE)
+    description = models.CharField(max_length=120, blank=True)
+    temp = models.IntegerField(blank=True,default=0)
+
+
+    @classmethod
+    def create(cls,resort_address,description,temp):
+        weather = cls(resort_address=resort_address,description=description,temp=temp)
+
+        return weather
